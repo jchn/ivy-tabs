@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   tagName: 'ul',
   attributeBindings: ['aria-multiselectable', 'role'],
   classNames: ['ivy-tab-list'],
+  classNameBindings: ['active-index'],
 
   init: function() {
     this._super();
@@ -23,6 +24,10 @@ export default Ember.Component.extend({
     this._super();
     Ember.run.once(this, this._unregisterWithTabsContainer);
   },
+
+  'active-index': Ember.computed(function() {
+    return 'tab-' + this.get('selected-index')
+  }).property('selected-index'),
 
   /**
    * Tells screenreaders that only one tab can be selected at a time.
